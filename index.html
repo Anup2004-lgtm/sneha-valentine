@@ -25,6 +25,15 @@ margin-top:25px;
 font-size:30px;
 }
 
+#countdown{
+font-size:22px;
+margin-top:30px;
+}
+
+.hidden{
+display:none;
+}
+
 .gallery{
 display:flex;
 flex-wrap:wrap;
@@ -46,18 +55,6 @@ transition:0.3s;
 transform:scale(1.05);
 }
 
-.ring{
-font-size:50px;
-margin-top:20px;
-animation:blink 1.5s infinite;
-}
-
-@keyframes blink{
-0%{opacity:1;}
-50%{opacity:0.4;}
-100%{opacity:1;}
-}
-
 button{
 padding:15px 25px;
 font-size:18px;
@@ -66,7 +63,7 @@ border-radius:30px;
 background:red;
 color:white;
 cursor:pointer;
-margin-top:15px;
+margin-top:20px;
 transition:0.3s;
 }
 
@@ -78,25 +75,19 @@ transform:scale(1.05);
 .letter{
 background:white;
 color:#ff2e63;
-padding:20px;
+padding:30px;
 border-radius:15px;
 margin:25px auto;
-max-width:500px;
+max-width:600px;
 font-size:16px;
-line-height:1.6;
+line-height:1.9;
+text-align:left;
 }
 
 .song-section{
 margin-top:20px;
 }
 
-.song-name{
-font-size:18px;
-font-weight:bold;
-margin-bottom:10px;
-}
-
-/* Floating Hearts */
 .heart{
 position:fixed;
 bottom:-10px;
@@ -115,7 +106,17 @@ animation:floatUp 6s linear infinite;
 
 <div class="container">
 
-<h1>For My Juniiioor Sneha 💖</h1>
+<h1>For My Junior Sneha 💖</h1>
+
+<div id="countdown"></div>
+
+<div id="mainContent" class="hidden">
+
+<h2>Will You Be My Valentine? ❤️</h2>
+
+<button onclick="startSurprise()">Click Here Babyyy 💕</button>
+
+<div id="surpriseContent" class="hidden">
 
 <div class="gallery">
 <img src="photo1.jpg" class="photo">
@@ -125,43 +126,101 @@ animation:floatUp 6s linear infinite;
 <img src="photo5.jpg" class="photo">
 </div>
 
-<div class="ring">💍</div>
-
-<h2>Will You Be My Valentine? ❤️</h2>
-
-<button onclick="showMessage()">Click Here</button>
-
 <div class="letter">
+
+<p><b>Meri Pyari Junior Sneha ❤️</b></p>
+
 <p>
-Meri pyari Sneha (Juniiioor),  
-Tum meri life ka sabse khoobsurat hissa ho.  
-Tumhari smile meri duniya roshan kar deti hai.  
-Main har din sirf tumhare saath future imagine karta hoon.  
-
-Is Valentine par main tumse wada karta hoon  
-ki main hamesha tumhe respect, care aur pyar dunga.  
-
-Tum meri ho… aur main hamesha tumhara rahunga. 💞
+Babyyy… pata nahi tumhe kaise bataun ki tum meri life me kitni important ho.  
+Jab tum meri life me aayi na, sab kuch change ho gaya.  
+Meri boring si duniya suddenly colorful ho gayi.
 </p>
+
+<p>
+Meri malkin 👑  
+Tum sirf meri girlfriend nahi ho… tum meri peace ho, meri happiness ho, meri future ho.  
+Tumhari hasi meri weakness hai, aur tumhara care mera sabse bada strength.
+</p>
+
+<p>
+Junior, jab tum thoda sa bhi upset hoti ho na, mera pura din kharab ho jata hai.  
+Aur jab tum ek choti si smile bhej deti ho… lagta hai duniya jeet li.
+</p>
+
+<p>
+Babyyy, main promise karta hoon ki main hamesha tumhara respect karunga,  
+kabhi tumhe hurt nahi karunga intentionally,  
+aur har situation me tumhara support system banunga.
+</p>
+
+<p>
+Mujhe tumhara attitude bhi pasand hai, tumhara gussa bhi cute lagta hai.  
+Meri malkin jab order deti hai na, mujhe acha lagta hai 😌❤️
+</p>
+
+<p>
+Main future imagine karta hoon… aur har jagah sirf tum nazar aati ho.  
+Chahe choti si fight ho ya badi problem,  
+main hamesha tumhara haath pakad ke chalna chahta hoon.
+</p>
+
+<p>
+Tum meri ho… aur main sirf tumhara.  
+Ye koi timepass wala pyar nahi hai babyyy,  
+ye forever wala feeling hai 💍
+</p>
+
+<p>
+Happy Valentine’s Day meri jaan, meri junior, meri malkin 👑❤️  
+I Love You So Much Babyyy 💖
+</p>
+
 </div>
 
 <div class="song-section">
-<div class="song-name">🎵 Song: Tum Hi Ho – Aashiqui 2</div>
-
-<audio controls loop>
+<audio id="bgSong" loop>
 <source src="song.mp3" type="audio/mpeg">
-Your browser does not support the audio element.
 </audio>
+</div>
+
+</div>
 </div>
 
 </div>
 
 <script>
-function showMessage(){
+
+let valentineDate = new Date("Feb 14, 2026 00:00:00").getTime();
+
+let countdown = document.getElementById("countdown");
+let mainContent = document.getElementById("mainContent");
+
+let timer = setInterval(function(){
+let now = new Date().getTime();
+let distance = valentineDate - now;
+
+if(distance < 0){
+clearInterval(timer);
+countdown.innerHTML = "❤️ It's Valentine Time ❤️";
+mainContent.classList.remove("hidden");
+}else{
+let days = Math.floor(distance/(1000*60*60*24));
+let hours = Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+let minutes = Math.floor((distance%(1000*60*60))/(1000*60));
+let seconds = Math.floor((distance%(1000*60))/1000);
+
+countdown.innerHTML = 
+"Valentine Countdown 💕<br>" +
+days+"d "+hours+"h "+minutes+"m "+seconds+"s ";
+}
+},1000);
+
+function startSurprise(){
+document.getElementById("surpriseContent").classList.remove("hidden");
+document.getElementById("bgSong").play();
 alert("Sneha Said YESSSS 💘✨");
 }
 
-// Floating hearts generator
 setInterval(function(){
 let heart=document.createElement("div");
 heart.className="heart";
@@ -174,6 +233,7 @@ setTimeout(()=>{
 heart.remove();
 },6000);
 },500);
+
 </script>
 
 </body>
